@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ninja Tests</title>
+    <link href="../node_modules/mocha/mocha.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="jquery/jquery-1.7.2.js"></script>
+    <script src="../ninja.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/chai-jquery/chai-jquery.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script>
+      var expect = chai.expect;
+      mocha.setup('bdd');
+    </script>
+    <script src="test.js"></script>
+    <script src="test.component.js"></script>
+    <script>
+      (function ($) {
+        mocha.run();
+        console.log($.ninja);
+      }(window.jQuery))
+    </script>
+  </body>
+</html>
+

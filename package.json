@@ -1,0 +1,53 @@
+{
+  "name": "ninja",
+
+  "version": "1.1.1",
+
+  "description": "Ninja UI",
+
+  "homepage": "http://ninjaui.com/",
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ninja/ninja.git"
+  },
+
+  "bugs": {
+    "url" : "http://github.com/ninja/ninja/issues"
+  },
+
+  "engines": {
+    "node": "0.8",
+    "npm": "1.1"
+  },
+
+  "devDependencies": {
+    "chai": "*",
+    "chai-jquery": "*",
+    "mocha": "*"
+  },
+
+  "main": "ninja",
+
+  "licenses": [
+    {
+      "type": "Apache 2",
+      "url": "http://ninjaui.com/license.txt"
+    }
+  ],
+
+  "author": {
+    "name": "Jamie Hoover",
+    "email": "dont.tase@me.com",
+    "url": "http://uipoet.com"
+  },
+
+  "contributors": [
+    {
+      "name": "Faisal N. Jawdat",
+      "email": "faisal@faisal.com",
+      "url": "http://faisail.com"
+    }
+  ]
+
+}
