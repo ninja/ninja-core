@@ -25,7 +25,7 @@
     },
     this.name = 'Ninja UI',
     this.selector = selector || '[data-ninja]';
-    this.version = '1.1.0';
+    this.version = '1.1.2';
   };
 
   $.Ninja.prototype.initialize = function () {
