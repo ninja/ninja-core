@@ -1,7 +1,7 @@
 {
   "name": "ninja",
 
-  "version": "1.1.2",
+  "version": "1.1.3",
 
   "description": "Ninja UI",
 
@@ -22,12 +22,14 @@
   },
 
   "devDependencies": {
-    "chai": "*",
-    "chai-jquery": "*",
-    "mocha": "*"
+    "dox": "0.3",
+    "grunt-contrib": "0.1",
+    "grunt-reload": "0.1",
+    "nib": "0.7",
+    "ninja.table": "1.1"
   },
 
-  "main": "ninja",
+  "main": "library/ninja",
 
   "licenses": [
     {
@@ -46,7 +48,7 @@
     {
       "name": "Faisal N. Jawdat",
       "email": "faisal@faisal.com",
-      "url": "http://faisail.com"
+      "url": "http://faisal.com"
     }
   ]
 
