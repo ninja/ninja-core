@@ -113,6 +113,12 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.registerTask('version', 'Replace version semver string with latest from package.json', function () {
+    var file = 'distribution/' + grunt.config.get('pkg').name + '.js';
+
+    grunt.file.write(file, grunt.file.read(file).replace(/0.0.0development/, grunt.config.get('pkg').version));
+  });
+
   grunt.registerTask('dox', 'Generate JSON file under documentation from comments in the library files.', function () {
     var
       name = grunt.config.get('pkg').name,
@@ -128,7 +134,7 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks(fs.existsSync('node_modules/grunt-reload') ? 'grunt-reload' : 'ninja/node_modules/grunt-reload');
 
-  grunt.registerTask('default', 'stylus lint server qunit dox concat min');
+  grunt.registerTask('default', 'stylus lint server qunit dox concat version min');
 
   grunt.registerTask('develop', 'server reloadServer watch');
 };
