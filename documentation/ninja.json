@@ -2,12 +2,22 @@
   {
     "tags": [],
     "description": {
-      "full": "<p>Ninja constructor</p>\n\n<p>Examples:</p>\n\n<pre><code>  var\n    defaultNinja = new Ninja('ninja'),\n    customNinja = new Ninja('katana');\n</code></pre>\n\n<p>@param {String} selector<br />  @return {Object} instance of constructor<br />  @api private</p>",
-      "summary": "<p>Ninja constructor</p>",
-      "body": "<p>Examples:</p>\n\n<pre><code>  var\n    defaultNinja = new Ninja('ninja'),\n    customNinja = new Ninja('katana');\n</code></pre>\n\n<p>@param {String} selector<br />  @return {Object} instance of constructor<br />  @api private</p>"
+      "full": "<h2>Begin Immediately-Invoked Function Expression</h2>\n\n<p>Assign <code>jQuery</code> to <code>$</code>.</p>\n\n<p>Enable ECMAScript 5 strict mode.</p>",
+      "summary": "<h2>Begin Immediately-Invoked Function Expression</h2>",
+      "body": "<p>Assign <code>jQuery</code> to <code>$</code>.</p>\n\n<p>Enable ECMAScript 5 strict mode.</p>"
+    },
+    "ignore": true,
+    "code": "(function ($) {\n  'use strict';"
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<h2>Ninja Constructor</h2>\n\n<p><code>keys</code> object for readable key event tests.</p>\n\n<p><code>version</code> semver string. Gets replaced with the package.json version at build time.</p>\n\n<pre><code>var ninja = new Ninja();\n</code></pre>",
+      "summary": "<h2>Ninja Constructor</h2>",
+      "body": "<p><code>keys</code> object for readable key event tests.</p>\n\n<p><code>version</code> semver string. Gets replaced with the package.json version at build time.</p>\n\n<pre><code>var ninja = new Ninja();\n</code></pre>"
     },
     "ignore": false,
-    "code": "function Ninja() {\n    this.keys = {\n      arrowDown: 40,\n      arrowLeft: 37,\n      arrowRight: 39,\n      arrowUp: 38,\n      enter: 13,\n      escape: 27,\n      tab: 9\n    };\n\n    this.version = '1.1.2';\n  }",
+    "code": "function Ninja() {\n    this.keys = {\n      arrowDown: 40,\n      arrowLeft: 37,\n      arrowRight: 39,\n      arrowUp: 38,\n      enter: 13,\n      escape: 27,\n      tab: 9\n    };\n\n    this.version = '0.0.0development';\n  }",
     "ctx": {
       "type": "function",
       "name": "Ninja",
@@ -17,9 +27,9 @@
   {
     "tags": [],
     "description": {
-      "full": "<p>Ninja group <code>initialize</code><br />  Initializes every element with the data-ninja attribute using its value as the type of component.<br />  This is the \"Dammit Jim! I'm an doctor, not a JavaScript engineer!\" function.</p>\n\n<p>Example:<br />      <input data-ninja=\"autocomplete\" list=\"bones\"/><br />      <datalist id=\"bones\"><br />        <option value=\"scanner\"/><br />        <option value=\"phaser\"/><br />        <option value=\"transporter\"/><br />      </datalist><br />      <script>$.ninja.initialize();</script></p>\n\n<p>@api private</p>",
-      "summary": "<p>Ninja group <code>initialize</code><br />  Initializes every element with the data-ninja attribute using its value as the type of component.<br />  This is the \"Dammit Jim! I'm an doctor, not a JavaScript engineer!\" function.</p>",
-      "body": "<p>Example:<br />      <input data-ninja=\"autocomplete\" list=\"bones\"/><br />      <datalist id=\"bones\"><br />        <option value=\"scanner\"/><br />        <option value=\"phaser\"/><br />        <option value=\"transporter\"/><br />      </datalist><br />      <script>$.ninja.initialize();</script></p>\n\n<p>@api private</p>"
+      "full": "<h2>Page-wide Initialize</h2>\n\n<p><code>initialize</code> every element with the data-ninja attribute using its value as the type of component.</p>\n\n<p>This is the \"Damn it Jim! I'm an doctor, not a JavaScript engineer!\" function.</p>\n\n<p>For components that require an array of values, the <code>&lt;datalist&gt;</code> element is used. Other options are specified via data attributes on the element being initialized.</p>\n\n<pre><code>&lt;input data-ninja=\"autocomplete\" list=\"bones\"/&gt;\n&lt;datalist id=\"bones\"&gt;\n  &lt;option value=\"scanner\"/&gt;\n  &lt;option value=\"phaser\"/&gt;\n  &lt;option value=\"transporter\"/&gt;\n&lt;/datalist&gt;\n&lt;script&gt;$.ninja.initialize();&lt;/script&gt;\n</code></pre>",
+      "summary": "<h2>Page-wide Initialize</h2>",
+      "body": "<p><code>initialize</code> every element with the data-ninja attribute using its value as the type of component.</p>\n\n<p>This is the \"Damn it Jim! I'm an doctor, not a JavaScript engineer!\" function.</p>\n\n<p>For components that require an array of values, the <code>&lt;datalist&gt;</code> element is used. Other options are specified via data attributes on the element being initialized.</p>\n\n<pre><code>&lt;input data-ninja=\"autocomplete\" list=\"bones\"/&gt;\n&lt;datalist id=\"bones\"&gt;\n  &lt;option value=\"scanner\"/&gt;\n  &lt;option value=\"phaser\"/&gt;\n  &lt;option value=\"transporter\"/&gt;\n&lt;/datalist&gt;\n&lt;script&gt;$.ninja.initialize();&lt;/script&gt;\n</code></pre>"
     },
     "ignore": false,
     "code": "Ninja.prototype.initialize = function () {\n    var $elements = $('[data-ninja]');\n\n    $elements.each(function () {\n      var $element = $(this);\n\n      $element.ninja($element.data('ninja'));\n    });\n  };",
@@ -33,9 +43,9 @@
   {
     "tags": [],
     "description": {
-      "full": "<p>Ninja <code>key</code></p>\n\n<p>Example:<br />      $('<input/>').on('keyup', function (event) {<br />        if ($.ninja.key(event.which, ['escape', 'tab']) {<br />          $(this).blur();<br />        }<br />      });</p>\n\n<p>@param {Number} key code<br />  @param {Array} list of key names<br />  @return true if key code is within key names<br />  @api private</p>",
-      "summary": "<p>Ninja <code>key</code></p>",
-      "body": "<p>Example:<br />      $('<input/>').on('keyup', function (event) {<br />        if ($.ninja.key(event.which, ['escape', 'tab']) {<br />          $(this).blur();<br />        }<br />      });</p>\n\n<p>@param {Number} key code<br />  @param {Array} list of key names<br />  @return true if key code is within key names<br />  @api private</p>"
+      "full": "<h2>Key Boolean</h2>\n\n<p><code>key</code> code is within an array of names?</p>\n\n<pre><code>$('&lt;input/&gt;').on('keyup', function (event) {\n  if ($.ninja.key(event.which, ['escape', 'tab']) {\n    $(this).blur();\n  }\n});\n</code></pre>",
+      "summary": "<h2>Key Boolean</h2>",
+      "body": "<p><code>key</code> code is within an array of names?</p>\n\n<pre><code>$('&lt;input/&gt;').on('keyup', function (event) {\n  if ($.ninja.key(event.which, ['escape', 'tab']) {\n    $(this).blur();\n  }\n});\n</code></pre>"
     },
     "ignore": false,
     "code": "Ninja.prototype.key = function (code, names) {\n    var\n      keys = this.keys,\n      codes = $.map(names, function (name) {\n        return keys[name];\n      });\n\n    return $.inArray(code, codes) > -1;\n  };",
@@ -49,29 +59,9 @@
   {
     "tags": [],
     "description": {
-      "full": "<p><code>$.ninja</code> instance</p>\n\n<p>Examples:</p>\n\n<pre><code>  $.ninja.initialize();\n  $.ninja.key(9, ['enter', 'tab']); // true\n  $.ninja.keys.enter; // 13\n  $.ninja.version; // 1.1.0\n</code></pre>\n\n<p>@api public</p>",
-      "summary": "<p><code>$.ninja</code> instance</p>",
-      "body": "<p>Examples:</p>\n\n<pre><code>  $.ninja.initialize();\n  $.ninja.key(9, ['enter', 'tab']); // true\n  $.ninja.keys.enter; // 13\n  $.ninja.version; // 1.1.0\n</code></pre>\n\n<p>@api public</p>"
-    },
-    "ignore": false,
-    "code": "$.ninja = new Ninja();"
-  },
-  {
-    "tags": [],
-    "description": {
-      "full": "<p><code>$().ninja()</code> individual <code>initialize</code></p>\n\n<p>Example:</p>\n\n<pre><code>  var $ninja = $('&lt;input/&gt;').ninja('autocomplete', {\n    datalist: ['one', 'two', 'three']\n  });\n</code></pre>\n\n<p>@param {String} component type<br />  @param {Object} options<br />  return {Object} jQuery object(s)<br />  @api public</p>",
-      "summary": "<p><code>$().ninja()</code> individual <code>initialize</code></p>",
-      "body": "<p>Example:</p>\n\n<pre><code>  var $ninja = $('&lt;input/&gt;').ninja('autocomplete', {\n    datalist: ['one', 'two', 'three']\n  });\n</code></pre>\n\n<p>@param {String} component type<br />  @param {Object} options<br />  return {Object} jQuery object(s)<br />  @api public</p>"
-    },
-    "ignore": false,
-    "code": "$.fn.ninja = function (component, options) {\n    return this.each(function () {\n      $.ninja[component](this, options);\n    });\n  };"
-  },
-  {
-    "tags": [],
-    "description": {
-      "full": "<p>Ninja component constructor<br />  Ninja components extend this object.</p>\n\n<p>Examples:</p>\n\n<pre><code>  var ninjaComponent = new $.Ninja();\n</code></pre>\n\n<p>@param {Object} jQuery object<br />  @param {Object} options<br />  @return {Object} instance of constructor<br />  @api public</p>",
-      "summary": "<p>Ninja component constructor<br />  Ninja components extend this object.</p>",
-      "body": "<p>Examples:</p>\n\n<pre><code>  var ninjaComponent = new $.Ninja();\n</code></pre>\n\n<p>@param {Object} jQuery object<br />  @param {Object} options<br />  @return {Object} instance of constructor<br />  @api public</p>"
+      "full": "<h2>Component Constructor</h2>\n\n<p>Merge an instance of this with a component instance to gain default behavior.</p>\n\n<pre><code>var autocomplete = $.merge(new $.Ninja(), new Autcomplete());\n</code></pre>",
+      "summary": "<h2>Component Constructor</h2>",
+      "body": "<p>Merge an instance of this with a component instance to gain default behavior.</p>\n\n<pre><code>var autocomplete = $.merge(new $.Ninja(), new Autcomplete());\n</code></pre>"
     },
     "ignore": false,
     "code": "$.Ninja = function (element, options) {\n    this.$element = element ? $(element) : $('<span>');\n    this.options = options || {};\n  };"
@@ -79,11 +69,71 @@
   {
     "tags": [],
     "description": {
-      "full": "<p>Ninja <code>deselect</code></p>\n\n<p>Example:<br />      $('<input/>').on('keyup', function (event) {<br />        if ($.ninja.key(event.which, ['escape', 'tab']) {<br />          $(this).blur();<br />        }<br />      });</p>\n\n<p>@param {Number} key code<br />  @param {Array} list of key names<br />  @return true if key code is within key names<br />  @api private</p>",
-      "summary": "<p>Ninja <code>deselect</code></p>",
-      "body": "<p>Example:<br />      $('<input/>').on('keyup', function (event) {<br />        if ($.ninja.key(event.which, ['escape', 'tab']) {<br />          $(this).blur();<br />        }<br />      });</p>\n\n<p>@param {Number} key code<br />  @param {Array} list of key names<br />  @return true if key code is within key names<br />  @api private</p>"
+      "full": "<h2>Deselect Component</h2>\n\n<p>Triggers deselect.ninja event if component is selected but not disabled.</p>\n\n<pre><code>&lt;button id=\"cut\"&gt;Cut&lt;/button&gt;\n&lt;script&gt;\n  $('#cut').ninja('button', {\n    select: true\n  }).on('deselect.ninja', function () {\n    // Do something.\n  }).deselect();\n&lt;/script&gt;\n</code></pre>",
+      "summary": "<h2>Deselect Component</h2>",
+      "body": "<p>Triggers deselect.ninja event if component is selected but not disabled.</p>\n\n<pre><code>&lt;button id=\"cut\"&gt;Cut&lt;/button&gt;\n&lt;script&gt;\n  $('#cut').ninja('button', {\n    select: true\n  }).on('deselect.ninja', function () {\n    // Do something.\n  }).deselect();\n&lt;/script&gt;\n</code></pre>"
     },
     "ignore": false,
-    "code": "$.Ninja.prototype.deselect = function () {\n    if (this.$element.hasClass('nui-slc') && !this.$element.hasClass('nui-dsb')) {\n      this.$element.trigger('deselect.ninja');\n    }\n  };\n\n  $.Ninja.prototype.disable = function () {\n    this.$element.addClass('nui-dsb').trigger('disable.ninja');\n  };\n\n  $.Ninja.prototype.enable = function () {\n    this.$element.removeClass('nui-dsb').trigger('enable.ninja');\n  };\n\n  $.Ninja.prototype.select = function () {\n    if (!this.$element.hasClass('nui-dsb')) {\n      this.$element.trigger('select.ninja');\n    }\n  };\n\n}(window.jQuery));"
+    "code": "$.Ninja.prototype.deselect = function () {\n    if (this.$element.hasClass('nui-slc') && !this.$element.hasClass('nui-dsb')) {\n      this.$element.trigger('deselect.ninja');\n    }\n  };"
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<h2>Disable Component</h2>\n\n<p>Adds disabled CSS class. Triggers disable.ninja event.</p>\n\n<pre><code>&lt;button id=\"cut\"&gt;Cut&lt;/button&gt;\n&lt;script&gt;\n  $('#cut').ninja('button').on('disable.ninja', function () {\n    // Do something.\n  }).disable();\n&lt;/script&gt;\n</code></pre>",
+      "summary": "<h2>Disable Component</h2>",
+      "body": "<p>Adds disabled CSS class. Triggers disable.ninja event.</p>\n\n<pre><code>&lt;button id=\"cut\"&gt;Cut&lt;/button&gt;\n&lt;script&gt;\n  $('#cut').ninja('button').on('disable.ninja', function () {\n    // Do something.\n  }).disable();\n&lt;/script&gt;\n</code></pre>"
+    },
+    "ignore": false,
+    "code": "$.Ninja.prototype.disable = function () {\n    this.$element.addClass('nui-dsb').trigger('disable.ninja');\n  };"
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<h2>Enable Component</h2>\n\n<p>Removes disabled CSS class. Triggers enable.ninja event.</p>\n\n<pre><code>$('&lt;input/&gt;').enable();\n</code></pre>",
+      "summary": "<h2>Enable Component</h2>",
+      "body": "<p>Removes disabled CSS class. Triggers enable.ninja event.</p>\n\n<pre><code>$('&lt;input/&gt;').enable();\n</code></pre>"
+    },
+    "ignore": false,
+    "code": "$.Ninja.prototype.enable = function () {\n    this.$element.removeClass('nui-dsb').trigger('enable.ninja');\n  };"
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<h2>Select Component</h2>\n\n<p>Triggers select.ninja event if component is not disabled.</p>\n\n<pre><code>$('&lt;input/&gt;').select();\n</code></pre>",
+      "summary": "<h2>Select Component</h2>",
+      "body": "<p>Triggers select.ninja event if component is not disabled.</p>\n\n<pre><code>$('&lt;input/&gt;').select();\n</code></pre>"
+    },
+    "ignore": false,
+    "code": "$.Ninja.prototype.select = function () {\n    if (!this.$element.hasClass('nui-dsb')) {\n      this.$element.trigger('select.ninja');\n    }\n  };"
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<h2>jQuery Instance</h2>\n\n<p><code>ninja</code> instance of Ninja class added to jQuery.</p>\n\n<pre><code>$.ninja.initialize();\n$.ninja.key(9, ['enter', 'tab']); // true\n$.ninja.keys.enter; // 13\n$.ninja.version; // 1.1.0\n</code></pre>",
+      "summary": "<h2>jQuery Instance</h2>",
+      "body": "<p><code>ninja</code> instance of Ninja class added to jQuery.</p>\n\n<pre><code>$.ninja.initialize();\n$.ninja.key(9, ['enter', 'tab']); // true\n$.ninja.keys.enter; // 13\n$.ninja.version; // 1.1.0\n</code></pre>"
+    },
+    "ignore": false,
+    "code": "$.ninja = new Ninja();"
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<h2>jQuery Object Initialize</h2>\n\n<p><code>ninja</code> component initialize a jQuery object.</p>\n\n<p>Prevents initializing the same component twice.</p>\n\n<pre><code>&lt;input id=\"katana\"/&gt;\n&lt;script&gt;\n  $('#katana').ninja('autocomplete', {\n    datalist: ['one', 'two', 'three']\n  });\n&lt;/script&gt;\n</code></pre>",
+      "summary": "<h2>jQuery Object Initialize</h2>",
+      "body": "<p><code>ninja</code> component initialize a jQuery object.</p>\n\n<p>Prevents initializing the same component twice.</p>\n\n<pre><code>&lt;input id=\"katana\"/&gt;\n&lt;script&gt;\n  $('#katana').ninja('autocomplete', {\n    datalist: ['one', 'two', 'three']\n  });\n&lt;/script&gt;\n</code></pre>"
+    },
+    "ignore": false,
+    "code": "$.fn.ninja = function (component, options) {\n    return this.each(function () {\n      if(!$.data(this, 'ninja.' + component)) {\n        $.data(this, 'ninja.' + component);\n\n        $.ninja[component](this, options);\n      }\n    });\n  };"
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "<h2>End Immediately-Invoked Function Expression</h2>\n\n<p>Preserve jQuery's state while invoking.</p>",
+      "summary": "<h2>End Immediately-Invoked Function Expression</h2>",
+      "body": "<p>Preserve jQuery's state while invoking.</p>"
+    },
+    "ignore": true,
+    "code": "}(jQuery));"
   }
 ]

@@ -1,19 +1,22 @@
+/*!
+##Begin Immediately-Invoked Function Expression
+
+Assign `jQuery` to `$`.
+
+Enable ECMAScript 5 strict mode.
+*/
 (function ($) {
   'use strict';
 
-  /*
-  Ninja constructor
+/*
+##Ninja Constructor
 
-  Examples:
+`keys` object for readable key event tests.
 
-      var
-        defaultNinja = new Ninja('ninja'),
-        customNinja = new Ninja('katana');
+`version` semver string. Gets replaced with the package.json version at build time.
 
-  @param {String} selector
-  @return {Object} instance of constructor
-  @api private
-  */
+    var ninja = new Ninja();
+*/
   function Ninja() {
     this.keys = {
       arrowDown: 40,
@@ -25,25 +28,26 @@
       tab: 9
     };
 
-    this.version = '1.1.2';
+    this.version = '0.0.0development';
   }
 
-  /*
-  Ninja group `initialize`
-  Initializes every element with the data-ninja attribute using its value as the type of component.
-  This is the "Dammit Jim! I'm an doctor, not a JavaScript engineer!" function.
+/*
+##Page-wide Initialize
 
-  Example:
-      <input data-ninja="autocomplete" list="bones"/>
-      <datalist id="bones">
-        <option value="scanner"/>
-        <option value="phaser"/>
-        <option value="transporter"/>
-      </datalist>
-      <script>$.ninja.initialize();</script>
+`initialize` every element with the data-ninja attribute using its value as the type of component.
 
-  @api private
-  */
+This is the "Damn it Jim! I'm an doctor, not a JavaScript engineer!" function.
+
+For components that require an array of values, the `<datalist>` element is used. Other options are specified via data attributes on the element being initialized.
+
+    <input data-ninja="autocomplete" list="bones"/>
+    <datalist id="bones">
+      <option value="scanner"/>
+      <option value="phaser"/>
+      <option value="transporter"/>
+    </datalist>
+    <script>$.ninja.initialize();</script>
+*/
   Ninja.prototype.initialize = function () {
     var $elements = $('[data-ninja]');
 
@@ -54,21 +58,17 @@
     });
   };
 
-  /*
-  Ninja `key`
+/*
+##Key Boolean
 
-  Example:
-      $('<input/>').on('keyup', function (event) {
-        if ($.ninja.key(event.which, ['escape', 'tab']) {
-          $(this).blur();
-        }
-      });
+`key` code is within an array of names?
 
-  @param {Number} key code
-  @param {Array} list of key names
-  @return true if key code is within key names
-  @api private
-  */
+    $('<input/>').on('keyup', function (event) {
+      if ($.ninja.key(event.which, ['escape', 'tab']) {
+        $(this).blur();
+      }
+    });
+*/
   Ninja.prototype.key = function (code, names) {
     var
       keys = this.keys,
@@ -79,91 +79,117 @@
     return $.inArray(code, codes) > -1;
   };
 
-  /*
-  `$.ninja` instance
+/*
+##Component Constructor
 
-  Examples:
+Merge an instance of this with a component instance to gain default behavior.
 
-      $.ninja.initialize();
-      $.ninja.key(9, ['enter', 'tab']); // true
-      $.ninja.keys.enter; // 13
-      $.ninja.version; // 1.1.0
-
-  @api public
-  */
-  $.ninja = new Ninja();
-
-  /*
-  `$().ninja()` individual `initialize`
-
-  Example:
-
-      var $ninja = $('<input/>').ninja('autocomplete', {
-        datalist: ['one', 'two', 'three']
-      });
-
-  @param {String} component type
-  @param {Object} options
-  return {Object} jQuery object(s)
-  @api public
-  */
-  $.fn.ninja = function (component, options) {
-    return this.each(function () {
-      $.ninja[component](this, options);
-    });
-  };
-
-  /*
-  Ninja component constructor
-  Ninja components extend this object.
-
-  Examples:
-
-      var ninjaComponent = new $.Ninja();
-
-  @param {Object} jQuery object
-  @param {Object} options
-  @return {Object} instance of constructor
-  @api public
-  */
+    var autocomplete = $.merge(new $.Ninja(), new Autcomplete());
+*/
   $.Ninja = function (element, options) {
     this.$element = element ? $(element) : $('<span>');
     this.options = options || {};
   };
 
-  /*
-  Ninja `deselect`
+/*
+##Deselect Component
 
-  Example:
-      $('<input/>').on('keyup', function (event) {
-        if ($.ninja.key(event.which, ['escape', 'tab']) {
-          $(this).blur();
-        }
-      });
+Triggers deselect.ninja event if component is selected but not disabled.
 
-  @param {Number} key code
-  @param {Array} list of key names
-  @return true if key code is within key names
-  @api private
-  */
+    <button id="cut">Cut</button>
+    <script>
+      $('#cut').ninja('button', {
+        select: true
+      }).on('deselect.ninja', function () {
+        // Do something.
+      }).deselect();
+    </script>
+*/
   $.Ninja.prototype.deselect = function () {
     if (this.$element.hasClass('nui-slc') && !this.$element.hasClass('nui-dsb')) {
       this.$element.trigger('deselect.ninja');
     }
   };
 
+/*
+##Disable Component
+
+Adds disabled CSS class. Triggers disable.ninja event.
+
+    <button id="cut">Cut</button>
+    <script>
+      $('#cut').ninja('button').on('disable.ninja', function () {
+        // Do something.
+      }).disable();
+    </script>
+*/
   $.Ninja.prototype.disable = function () {
     this.$element.addClass('nui-dsb').trigger('disable.ninja');
   };
 
+/*
+##Enable Component
+
+Removes disabled CSS class. Triggers enable.ninja event.
+
+    $('<input/>').enable();
+*/
   $.Ninja.prototype.enable = function () {
     this.$element.removeClass('nui-dsb').trigger('enable.ninja');
   };
 
+/*
+##Select Component
+
+Triggers select.ninja event if component is not disabled.
+
+    $('<input/>').select();
+*/
   $.Ninja.prototype.select = function () {
     if (!this.$element.hasClass('nui-dsb')) {
       this.$element.trigger('select.ninja');
     }
   };
 
-}(window.jQuery));
+/*
+##jQuery Instance
+
+`ninja` instance of Ninja class added to jQuery.
+
+    $.ninja.initialize();
+    $.ninja.key(9, ['enter', 'tab']); // true
+    $.ninja.keys.enter; // 13
+    $.ninja.version; // 1.1.0
+*/
+  $.ninja = new Ninja();
+
+/*
+##jQuery Object Initialize
+
+`ninja` component initialize a jQuery object.
+
+Prevents initializing the same component twice.
+
+    <input id="katana"/>
+    <script>
+      $('#katana').ninja('autocomplete', {
+        datalist: ['one', 'two', 'three']
+      });
+    </script>
+*/
+  $.fn.ninja = function (component, options) {
+    return this.each(function () {
+      if(!$.data(this, 'ninja.' + component)) {
+        $.data(this, 'ninja.' + component);
+
+        $.ninja[component](this, options);
+      }
+    });
+  };
+
+/*!
+##End Immediately-Invoked Function Expression
+
+Preserve jQuery's state while invoking.
+*/
+}(jQuery));
