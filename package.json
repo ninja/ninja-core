@@ -24,7 +24,7 @@
   "devDependencies": {
     "dox": "0.3",
     "grunt-contrib": "0.1",
-    "grunt-reload": "0.1",
+    "grunt-reload": "0.1"
   },
 
   "main": "library/ninja",
