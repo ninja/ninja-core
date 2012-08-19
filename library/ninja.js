@@ -179,7 +179,7 @@ Prevents initializing the same component twice.
 */
   $.fn.ninja = function (component, options) {
     return this.each(function () {
-      if(!$.data(this, 'ninja.' + component)) {
+      if (!$.data(this, 'ninja.' + component)) {
         $.data(this, 'ninja.' + component);
 
         $.ninja[component](this, options);

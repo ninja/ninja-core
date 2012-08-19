@@ -23,8 +23,10 @@
 
   "devDependencies": {
     "dox": "0.3",
-    "grunt-contrib": "0.1",
-    "grunt-reload": "0.1"
+    "grunt": "0.4",
+    "grunt-reload": "0.1",
+    "nib": "0.7",
+    "stylus": "0.29"
   },
 
   "main": "library/ninja",
