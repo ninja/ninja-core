@@ -1,15 +1,13 @@
-var
-  stylus = require('stylus'),
-  nib = require('nib'),
-  name = require('../package.json').name,
-  path = require('path'),
-  distribution = path.resolve(__dirname, '..', 'distribution', name + '.css'),
-  library = path.resolve(__dirname, '..', 'library', name + '.styl');
-
 module.exports = function (grunt) {
   'use strict';
 
-  grunt.registerTask('stylesheet', 'Compile CSS file from a Stylus file.', function () {
+  grunt.registerMultiTask('stylus', 'Compile CSS file from a Stylus file.', function () {
+    var
+      stylus = require('stylus'),
+      nib = require('nib'),
+      distribution = this.file.dest,
+      library = this.file.src;
+
     stylus(grunt.file.read(library))
       .use(nib())['import']('nib')
       .set('compress', true)

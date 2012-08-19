@@ -18,7 +18,9 @@ module.exports = function (grunt) {
         evil: false, // eval not allowed
         expr: false, // expression statements not allowed
         indent: 2, // two spaces for indenting required
-        loopfunc: false, // functions within loops not allowed
+        jquery: true, // jQuery globals allowed
+        loopfunc: false, // functions within loops not allowed,
+        node: true, // Node.js globals allowed,
         regexdash: false, // unescaped first/last dash (-) inside brackets not allowed
         shadow: false, // variable shadowing not allowed
         strict: true, // 'use strict'; in functions required
@@ -44,27 +46,47 @@ module.exports = function (grunt) {
       test: {
         options: {
           options: '<config:jshint.options>',
-          globals: {
-            module: false, // QUnit
-            ok: false, // QUnit
-            setup: false, // QUnit
-            strictEqual: false, // QUnit
-            test: false // QUnit
+          globals: { // QUnit globals allowed
+            module: false,
+            ok: false,
+            setup: false,
+            strictEqual: false,
+            test: false
           }
         },
         src: 'test/**/*.test.js'
       }
     },
+    stylus: {
+      dist: {
+        src: 'library/<%= pkg.name %>.styl',
+        dest: 'distribution/<%= pkg.name %>.css'
+      }
+    },
     qunit: {
       files: 'test/**/*.html'
+    },
+    dox: {
+      dist: {
+        src: 'library/<%= pkg.name %>.js',
+        dest: 'documentation/<%= pkg.name %>.json'
+      }
     },
     concat: {
       options: {
         banner: '<config:banner>'
       },
       dist: {
-        src: ['<file_strip_banner:library/<%= pkg.name %>.js>'],
+        src: '<file_strip_banner:library/<%= pkg.name %>.js>',
         dest: 'distribution/<%= pkg.name %>.js'
+      }
+    },
+    version: {
+      options: {
+        placeholder: '0.0.0development'
+      },
+      dist: {
+        dest: '<config:concat.dist.dest>'
       }
     },
     min: {

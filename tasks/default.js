@@ -2,10 +2,10 @@ module.exports = function (grunt) {
   'use strict';
 
   grunt.registerTask('default', [
-    'stylesheet',
+    'stylus',
     'lint',
-    'test',
-    'documentation',
+    'qunit',
+    'dox',
     'concat',
     'version',
     'min'
