@@ -1,7 +1,7 @@
 {
   "name": "ninja",
 
-  "version": "1.1.5",
+  "version": "1.1.6",
 
   "description": "Ninja UI",
 
@@ -22,9 +22,12 @@
   },
 
   "devDependencies": {
+    "consolidate": "0.4",
     "dox": "0.3",
+    "express": "3.0",
     "grunt": "0.4",
     "grunt-reload": "0.1",
+    "handlebars": "1.0",
     "nib": "0.7",
     "stylus": "0.29"
   },

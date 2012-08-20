@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{name}}</title>
+    <link rel="stylesheet" href="/{{name}}.css" />
+  </head>
+  <body class="nui">
+    <div>
+      <h1>{{name}}</h1>
+      <table class="nui-tbl">
+        <tbody>{{#each documentation}}
+          <tr>
+            <td>
+              <pre>
+                <code>{{#unless ignore}}  {{/unless}}{{{code}}}</code>
+              </pre>
+            </td>
+            <td>
+              {{{description.summary}}}
+              {{{description.body}}}
+            </td>
+          </tr>
+        {{/each}}</tbody>
+      </table>
+    </div>
+  </body>
+</html>

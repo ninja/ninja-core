@@ -120,13 +120,12 @@ module.exports = function (grunt) {
         tasks: ['lint:test', 'qunit', 'reload']
       }
     },
-    server: {
-      base: '.',
-      port: 3000
-    },
     reload: {
-      port: 35729,
-      livereload: true
+      port: 3000,
+      proxy: {
+        host: 'localhost',
+        port: 8000
+      }
     }
   });
 
