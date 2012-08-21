@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>{{name}}</title>
-    <style>{{{style}}}</style>
+    <style id="style">{{{style}}}</style>
   </head>
   <body class="nui">
     <div>
@@ -24,5 +24,9 @@
         {{/each}}</tbody>
       </table>
     </div>
-  </body>
+    <script src="/jquery.js"></script>
+    <script>window._$ = jQuery.noConflict(true);</script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/socket.js"></script>
+ </body>
 </html>

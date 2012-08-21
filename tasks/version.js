@@ -6,10 +6,12 @@ module.exports = function (grunt) {
       version = grunt.config.get('pkg.version'),
       placeholder = grunt.config.get('version.options.placeholder') || '0.0.0development',
       regularexpression = new RegExp(placeholder),
-      distribution = this.file.dest;
+      files = grunt.file.expand(this.file.src);
 
-    grunt.file.write(distribution, grunt.file.read(distribution).replace(regularexpression, version));
+    files.forEach(function (file) {
+      grunt.file.write(file, grunt.file.read(file).replace(regularexpression, version));
 
-    grunt.log.writeln('Replaced "' + placeholder + '" with "' + version + '": ' + distribution);
+      grunt.log.writeln('Replaced "' + placeholder + '" with "' + version + '": ' + file);
+    });
   });
 };

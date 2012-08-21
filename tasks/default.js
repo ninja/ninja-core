@@ -4,6 +4,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'stylus',
     'lint',
+    'server',
     'qunit',
     'dox',
     'concat',

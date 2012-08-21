@@ -1,29 +1,40 @@
 module.exports = function (grunt) {
   'use strict';
 
-  grunt.registerMultiTask('stylus', 'Compile CSS file from a Stylus file.', function () {
+  grunt.registerMultiTask('stylus', 'Compile CSS file from Stylus file(s).', function () {
     var
+      css = '',
       stylus = require('stylus'),
       nib = require('nib'),
       distribution = this.file.dest,
-      library = this.file.src;
+      library = grunt.file.expand(this.file.src),
+      index = 0;
 
-    stylus(grunt.file.read(library))
-      .use(nib())['import']('nib')
-      .set('compress', true)
-      .set('filename', library)
-      .render(function (error, css) {
-        if (error) {
-          grunt.log.error(error);
+    library.forEach(function (file) {
+      stylus(grunt.file.read(file))
+        .use(nib())
+        .import('nib')
+        .set('compress', true)
+        .set('filename', file)
+        .render(function (error, styles) {
+          if (error) {
+            grunt.log.error(error);
 
-          grunt.fail.warn('Stylus failed.');
-        } else {
-          grunt.log.writeln('Stylus parsed: ' + library);
+            grunt.fail.warn('Failed.');
+          } else {
+            grunt.log.writeln('Parsed: ' + file);
 
-          grunt.file.write(distribution, css);
+            css += styles;
 
-          grunt.log.writeln('Stylus compiled: ' + distribution);
-        }
-      });
+            index += 1;
+
+            if (index === library.length) {
+              grunt.file.write(distribution, css);
+
+              grunt.log.writeln('Compiled: ' + distribution);
+            }
+          }
+        });
+    });
   });
 };

@@ -15,6 +15,7 @@ module.exports = function (grunt) {
         asi: false, // automatic semicolon insertion not allowed
         boss: false, // advanced usage of assignments not allowed
         eqnull: false, // == null comparisons not allowed
+        es5: true, // allow reserved words, such as `import` and `use`
         evil: false, // eval not allowed
         expr: false, // expression statements not allowed
         indent: 2, // two spaces for indenting required
@@ -41,7 +42,7 @@ module.exports = function (grunt) {
       },
       tasks: {
         options: '<config:jshint>',
-        src: 'tasks/**/*.js'
+        src: ['tasks/*.js', 'tasks/public/socket.js']
       },
       test: {
         options: {
@@ -54,20 +55,20 @@ module.exports = function (grunt) {
             test: false
           }
         },
-        src: 'test/**/*.test.js'
+        src: 'test/**/*.js'
       }
     },
     stylus: {
-      dist: {
-        src: 'library/<%= pkg.name %>.styl',
+      ninja: {
+        src: 'library/**/ninja-*.styl',
         dest: 'distribution/<%= pkg.name %>.css'
       }
     },
     qunit: {
-      files: 'localhost:8000/test'
+      ninja: 'http://localhost:3000/test'
     },
     dox: {
-      dist: {
+      ninja: {
         src: 'library/<%= pkg.name %>.js',
         dest: 'documentation/<%= pkg.name %>.json'
       }
@@ -76,7 +77,7 @@ module.exports = function (grunt) {
       options: {
         banner: '<config:banner>'
       },
-      dist: {
+      ninja: {
         src: '<file_strip_banner:library/<%= pkg.name %>.js>',
         dest: 'distribution/<%= pkg.name %>.js'
       }
@@ -85,16 +86,16 @@ module.exports = function (grunt) {
       options: {
         placeholder: '0.0.0development'
       },
-      dist: {
-        dest: '<config:concat.dist.dest>'
+      ninja: {
+        src: '<config:concat.ninja.dest>'
       }
     },
     min: {
       options: {
         banner: '<config:banner>'
       },
-      dist: {
-        src: ['<config:concat.dist.dest>'],
+      ninja: {
+        src: '<config:concat.ninja.dest>',
         dest: 'distribution/<%= pkg.name %>.min.js'
       }
     },
@@ -112,22 +113,22 @@ module.exports = function (grunt) {
         tasks: ['lint:library', 'qunit', 'reload']
       },
       stylus: {
-        files: 'library/<config.pkg.name>.styl',
-        tasks: ['stylus', 'reload']
+        files: 'library/**/*.styl',
+        tasks: ['stylus', 'restyle']
       },
       test: {
         files: ['<config:lint.test.src>', '<config:watch.examples.files>'],
         tasks: ['lint:test', 'qunit', 'reload']
       }
     },
-    reload: {
-      port: 3000,
-      proxy: {
-        host: 'localhost',
-        port: 8000
-      }
+    server: {
+      port: 3000
     }
   });
+
+  grunt.registerTask('reload', function () {});
+
+  grunt.registerTask('restyle', function () {});
 
   grunt.unregisterTasks('init');
 };
