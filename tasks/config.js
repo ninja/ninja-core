@@ -64,7 +64,7 @@ module.exports = function (grunt) {
       }
     },
     qunit: {
-      files: 'test/**/*.html'
+      files: 'localhost:8000/test'
     },
     dox: {
       dist: {

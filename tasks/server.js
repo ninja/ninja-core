@@ -11,7 +11,9 @@ module.exports = function (grunt) {
       stylus = require('stylus'),
       http = require('http'),
       path = require('path'),
-      app = express();
+      app = express(),
+      name = grunt.config.get('pkg.name'),
+      component = name !== 'ninja';
 
     app.configure(function () {
       app.engine('html', handlebars);
@@ -23,20 +25,7 @@ module.exports = function (grunt) {
       app.use(express.bodyParser());
       app.use(express.methodOverride());
       app.use(app.router);
-      app.use(stylus.middleware({
-        dest: path.resolve(__dirname, 'server/public'),
-        src: './library',
-        compile: function (string) {
-          return stylus(string)
-            .set('force', true)
-            .set('compress', true)
-            .use(nib())
-            ['import']('nib')
-            ['import'](path.resolve(__dirname, '../library/ninja'))
-            ['import'](path.resolve(__dirname, '../library/ninja-code'))
-            ['import'](path.resolve(__dirname, '../library/ninja-table'));
-        }
-      }));
+      app.use(express['static'](path.resolve(__dirname, 'server/public')));
       app.use(express['static'](path.resolve(__dirname, 'server/public')));
     });
 
@@ -44,17 +33,52 @@ module.exports = function (grunt) {
       app.use(express.errorHandler());
     });
 
-    app.get('/', function(req, res) {
-      res.render('documentation', {
-        name: grunt.config.get('pkg.name'),
-        documentation: dox.parseComments(grunt.file.read(grunt.file.expandFiles(grunt.config.get('dox.dist.src'))))
-      });
+    app.get('/', function (req, res) {
+      stylus(grunt.file.read(grunt.file.expand('library/<%= pkg.name %>.styl')))
+        .use(nib())['import']('nib')
+        ['import'](path.resolve(__dirname, '../library/ninja'))
+        ['import'](path.resolve(__dirname, '../library/ninja-code'))
+        ['import'](path.resolve(__dirname, '../library/ninja-table'))
+        .set('force', true)
+        .set('compress', true)
+        .render(function (error, style) {
+          if (error) {
+            grunt.log.error(error);
+          } else {
+            res.render('documentation', {
+              name: name,
+              component: component,
+              documentation: dox.parseComments(grunt.file.read(grunt.file.expandFiles(grunt.config.get('dox.dist.src')))),
+              style: style
+            });
+          }
+        });
     });
 
-    app.get('/test', function(req, res) {
-      res.render('documentation', {
-        name: 'Ninja Autocomplete jQuery Plugin'
-      });
+    app.get('/library/*.js', function (req, res) {
+      res.send(grunt.file.read(grunt.file.expand('library/<%= pkg.name %>.js')));
+    });
+
+    app.get('/test/*.js', function (req, res) {
+      res.send(grunt.file.read(grunt.file.expand('test/<%= pkg.name %>.js')));
+    });
+
+    app.get('/test', function (req, res) {
+      stylus(grunt.file.read(grunt.file.expand('library/<%= pkg.name %>.styl')))
+        .use(nib())['import']('nib')
+        .set('force', true)
+        .set('compress', true)
+        .render(function (error, style) {
+          if (error) {
+            grunt.log.error(error);
+          } else {
+            res.render('test', {
+              name: name,
+              component: component,
+              style: style
+            });
+          }
+        });
     });
 
     http.createServer(app).listen(app.get('port'));
