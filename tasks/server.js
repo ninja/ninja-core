@@ -55,6 +55,10 @@ module.exports = function (grunt) {
         });
     });
 
+    app.get('/library/ninja.js', function (req, res) {
+      res.sendfile(path.resolve(__dirname, '../library/ninja.js'));
+    });
+
     app.get('/library/*.js', function (req, res) {
       res.send(grunt.file.read(grunt.file.expand('library/<%= pkg.name %>.js')));
     });
