@@ -14,6 +14,7 @@ module.exports = function (grunt) {
       options: { // overrides: https://github.com/jshint/jshint/blob/master/jshint.js#L253
         asi: false, // automatic semicolon insertion not allowed
         boss: false, // advanced usage of assignments not allowed
+        browser: true, // browser globals allowed
         eqnull: false, // == null comparisons not allowed
         es5: true, // allow reserved words, such as `import` and `use`
         evil: false, // eval not allowed
@@ -47,10 +48,19 @@ module.exports = function (grunt) {
       test: {
         options: {
           options: '<config:jshint.options>',
-          globals: { // QUnit globals allowed
-            module: false,
+          globals: {
+            // QUnit globals allowed
+            asyncTest: false,
+            deepEqual: false,
+            equal: false,
+            expect: false,
+            notEqual: false,
+            notStrictEqual: false,
             ok: false,
+            raises: false,
             setup: false,
+            start: false,
+            stop: false,
             strictEqual: false,
             test: false
           }
