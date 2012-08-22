@@ -67,10 +67,14 @@ module.exports = function (grunt) {
     });
 
     app.get('/library/*.js', function (req, res) {
+      res.set('Content-Type', 'text/javascript');
+
       res.send(grunt.file.read(grunt.file.expand('library/<%= pkg.name %>.js')));
     });
 
     app.get('/test/*.js', function (req, res) {
+      res.set('Content-Type', 'text/javascript');
+
       res.send(grunt.file.read(grunt.file.expand('test/<%= pkg.name %>.js')));
     });
 
