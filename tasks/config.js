@@ -104,10 +104,6 @@ module.exports = function (grunt) {
         files: '<config:lint.gruntfile.src>',
         tasks: ['lint:gruntfile']
       },
-      examples: {
-        files: 'examples/**/*.html',
-        tasks: ['reload']
-      },
       library: {
         files: '<config:lint.library.src>',
         tasks: ['lint:library', 'qunit', 'reload']
