@@ -117,7 +117,7 @@ module.exports = function (grunt) {
         tasks: ['stylus', 'restyle']
       },
       test: {
-        files: ['<config:lint.test.src>', '<config:watch.examples.files>'],
+        files: ['<config:lint.test.src>', 'test/**/*.html'],
         tasks: ['lint:test', 'qunit', 'reload']
       }
     },
