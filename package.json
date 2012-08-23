@@ -1,26 +1,19 @@
 {
   "name": "ninja",
-
-  "version": "1.1.6",
-
+  "version": "1.1.7",
   "description": "Ninja UI",
-
   "homepage": "http://ninjaui.com/",
-
   "repository": {
     "type": "git",
     "url": "https://github.com/ninja/ninja.git"
   },
-
   "bugs": {
     "url" : "http://github.com/ninja/ninja/issues"
   },
-
   "engines": {
     "node": "0.8",
     "npm": "1.1"
   },
-
   "devDependencies": {
     "consolidate": "0.4",
     "dox": "0.3",
@@ -31,22 +24,23 @@
     "socket.io": "0.9",
     "stylus": "0.29"
   },
-
+  "scripts": {
+    "prepublish": "./node_modules/grunt/bin/grunt",
+    "start": "./node_modules/grunt/bin/grunt start",
+    "test": "./node_modules/grunt/bin/grunt test"
+  },
   "main": "library/ninja",
-
   "licenses": [
     {
-      "type": "Apache 2",
+      "type": "Apache License v2.0",
       "url": "http://ninjaui.com/license.txt"
     }
   ],
-
   "author": {
     "name": "Jamie Hoover",
     "email": "dont.tase@me.com",
     "url": "http://uipoet.com"
   },
-
   "contributors": [
     {
       "name": "Faisal N. Jawdat",

@@ -1,8 +1,10 @@
 module.exports = function (grunt) {
   'use strict';
 
-  grunt.registerTask('browser', [
+  grunt.registerTask('test', [
+    'stylus',
+    'lint',
     'server',
-    'watch'
+    'qunit'
   ]);
 };
