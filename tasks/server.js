@@ -22,7 +22,7 @@ module.exports = function (grunt) {
       app.set('views', path.resolve(__dirname, 'server/views'));
       app.set('view engine', 'html');
       app.use(express.favicon());
-      app.use(express.logger('dev'));
+      app.use(express.logger(function () {}));
       app.use(express.bodyParser());
       app.use(express.methodOverride());
       app.use(app.router);
@@ -91,9 +91,11 @@ module.exports = function (grunt) {
 
     server.listen(app.get('port'));
 
-    io.sockets.on('connection', function (socket) {
-      grunt.log.writeln('For live browsing, visit http://localhost:' + app.get('port'));
+    io.configure(function () {
+      io.set('log level', 1);
+    });
 
+    io.sockets.on('connection', function (socket) {
       socket.on('reload', function (message) {
         console.log(message);
       });
