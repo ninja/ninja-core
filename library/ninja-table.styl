@@ -8,11 +8,15 @@ table.nui-tbl {
   border-radius: 4px;
   border-spacing: 0;
   display: inline-table;
+  > thead > tr > th {
+    padding: 6px 26px;
+    text-align: left;
+  }
   > tbody > tr {
     > td, > th {
       border-left: 1px solid #efefef;
       border-bottom: @border-left;
-      padding: 24px;
+      padding: 12px 24px;
       vertical-align: top;
       &.nui-nbr {
         text-align: right;

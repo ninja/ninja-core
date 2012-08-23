@@ -37,9 +37,10 @@ module.exports = function (grunt) {
       stylus(grunt.file.read(grunt.file.expand('library/<%= pkg.name %>.styl')))
         .use(nib())
         .import('nib')
-        .import(path.resolve(__dirname, '../library/ninja'))
         .import(path.resolve(__dirname, '../library/ninja-code'))
         .import(path.resolve(__dirname, '../library/ninja-table'))
+        .import(path.resolve(__dirname, '../library/ninja-documentation'))
+        .import(path.resolve(__dirname, '../library/ninja-qunit'))
         .set('force', true)
         .set('compress', true)
         .render(function (error, styles) {
