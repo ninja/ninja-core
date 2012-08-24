@@ -19,9 +19,11 @@
     <h1 id="qunit-header">{{name}}</h1>
     <div id="qunit-testrunner-toolbar"></div>
     <div id="qunit-banner"></div>
+    {{#if fixture}}
     <div id="qunit-examples">{{{fixture}}}</div>
+    <div id="qunit-fixture">{{{fixture}}}</div>
+    {{/if}}
     <ol id="qunit-tests"></ol>
     <div id="qunit-userAgent"></div>
-    <div id="qunit-fixture">{{{fixture}}}</div>
   </body>
 </html>

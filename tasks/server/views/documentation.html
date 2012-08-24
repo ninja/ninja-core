@@ -9,24 +9,42 @@
     <div>
       <h1>{{name}}</h1>
       <table class="nui-tbl">
-        <tbody>{{#each documentation}}
+        <tbody>
           <tr>
             <td>
-              <pre>
-                <code>{{#unless ignore}}  {{/unless}}{{{code}}}</code>
-              </pre>
+              <pre><code>{{first.code}}</code></pre>
+            </td>
+            <td>
+              {{{first.description.summary}}}
+              {{{first.description.body}}}
+            </td>
+          </tr>
+          {{#each middle}}
+          <tr>
+            <td>
+              <pre><code>  {{code}}</code></pre>
             </td>
             <td>
               {{{description.summary}}}
               {{{description.body}}}
             </td>
           </tr>
-        {{/each}}</tbody>
+          {{/each}}
+          <tr>
+            <td>
+              <pre><code>{{last.code}}</code></pre>
+            </td>
+            <td>
+              {{{last.description.summary}}}
+              {{{last.description.body}}}
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
-    <script src="/jquery.js"></script>
-    <script>window._$ = jQuery.noConflict(true);</script>
+    {{#if socket}}
     <script src="/socket.io/socket.io.js"></script>
     <script src="/socket.js"></script>
+    {{/if}}
  </body>
 </html>

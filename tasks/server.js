@@ -53,11 +53,26 @@ module.exports = function (grunt) {
     }
 
     app.get('/', function (req, res) {
+      var
+        middle = dox.parseComments(grunt.file.read(grunt.file.expand(grunt.config.get('documentation.ninja.src')))),
+        first = middle.shift(),
+        last = middle.pop(),
+        socket;
+
+      if (req.param('socket') === 'false') {
+        socket = false;
+      } else {
+        socket = true;
+      }
+
       style(function (style) {
         res.render('documentation', {
           name: name,
           component: component,
-          documentation: dox.parseComments(grunt.file.read(grunt.file.expand(grunt.config.get('dox.ninja.src')))),
+          first: first,
+          middle: middle,
+          last: last,
+          socket: socket,
           style: style
         });
       });

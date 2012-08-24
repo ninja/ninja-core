@@ -6,7 +6,7 @@ module.exports = function (grunt) {
     'lint',
     'server',
     'qunit',
-    'dox',
+    'documentation',
     'concat',
     'version',
     'min'

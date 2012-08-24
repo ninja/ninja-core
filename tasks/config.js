@@ -77,10 +77,10 @@ module.exports = function (grunt) {
     qunit: {
       ninja: 'http://localhost:3000/test'
     },
-    dox: {
+    documentation: {
       ninja: {
         src: 'library/<%= pkg.name %>.js',
-        dest: 'documentation/<%= pkg.name %>.json'
+        dest: 'distribution/<%= pkg.name %>.documentation.html'
       }
     },
     concat: {

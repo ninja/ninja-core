@@ -3,6 +3,8 @@ $pass = #6c6;
 $normal = #ccc;
 $subtle = #666;
 
+@import('nib');
+
 #qunit-ninja {
   background: #111 no-repeat linear-gradient(#222, #111);
   color: $normal;
@@ -25,7 +27,7 @@ $subtle = #666;
   #qunit-header {
     font-size: 24px;
     line-height: 1;
-    margin: 0;
+    margin: 0 520px 0 0;
     > a {
       color: $normal;
       text-decoration: none;
@@ -71,6 +73,11 @@ $subtle = #666;
     }
     label {
       display: inline-block;
+    }
+    select {
+      position: absolute;
+      right: 24px;
+      top: 22px;
     }
   }
 
