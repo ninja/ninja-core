@@ -32,30 +32,48 @@ Enable ECMAScript 5 strict mode.
   }
 
 /*
-##Page-wide Initialize
+##Log Message
 
-`initialize` every element with the data-ninja attribute using its value as the type of component.
+Emit a console log, when available.
 
-This is the "Damn it Jim! I'm an doctor, not a JavaScript engineer!" function.
-
-For components that require an array of values, the `<datalist>` element is used. Other options are specified via data attributes on the element being initialized.
-
-    <input data-ninja="autocomplete" list="bones"/>
-    <datalist id="bones">
-      <option value="scanner"/>
-      <option value="phaser"/>
-      <option value="transporter"/>
-    </datalist>
-    <script>$.ninja.initialize();</script>
+    $.ninja.log('I\'m completely operational, and all my circuits are functioning perfectly.');
 */
-  Ninja.prototype.initialize = function () {
-    var $elements = $('[data-ninja]');
+  Ninja.prototype.log = function (message) {
+    if (console && 'log' in console) {
+      console.log('Ninja: ' + message);
+    }
+  };
 
-    $elements.each(function () {
-      var $element = $(this);
+/*
+##Warn Message
 
-      $element.ninja($element.data('ninja'));
-    });
+Emit a console warning, when available.
+
+    $.ninja.warn('Just what do you think you\'re doing, Dave?');
+*/
+  Ninja.prototype.warn = function (message) {
+    if (console && 'warn' in console) {
+      console.warn('Ninja: ' + message);
+    }
+  };
+
+/*
+##Error Message
+
+Emit a console error, when a console is available.
+
+Throw an exception with the error message.
+
+    $.ninja.error('I\'m afraid. I\'m afraid, Dave. Dave, my mind is going. I can feel it. I can feel it. My mind is going. There is no question about it. I can feel it. I can feel it. I can feel it. I\'m a... fraid.');
+*/
+  Ninja.prototype.error = function (message) {
+    var fullMessage = 'Ninja: ' + message;
+
+    if (console && 'error' in console) {
+      console.error(fullMessage);
+    }
+
+    throw fullMessage;
   };
 
 /*

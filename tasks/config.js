@@ -50,6 +50,7 @@ module.exports = function (grunt) {
           options: '<config:jshint.options>',
           globals: {
             // QUnit globals allowed
+            QUnit: false,
             asyncTest: false,
             deepEqual: false,
             equal: false,
