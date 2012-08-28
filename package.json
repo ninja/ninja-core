@@ -18,7 +18,7 @@
     "consolidate": "0.4",
     "dox": "0.3",
     "express": "3.0",
-    "grunt": "0.4",
+    "grunt": "git://github.com/cowboy/grunt.git#21f8b63f5edd102a9f9d294ef324a5e778cf0bca",
     "handlebars": "1.0",
     "nib": "0.7",
     "socket.io": "0.9",

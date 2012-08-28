@@ -86,10 +86,11 @@ module.exports = function (grunt) {
     },
     concat: {
       options: {
-        banner: '<config:banner>'
+        banner: '<%= banner %>',
+        stripBanners: true
       },
       ninja: {
-        src: '<file_strip_banner:library/<%= pkg.name %>.js>',
+        src: 'library/<%= pkg.name %>.js>',
         dest: 'distribution/<%= pkg.name %>.js'
       }
     },
@@ -98,25 +99,25 @@ module.exports = function (grunt) {
         placeholder: '0.0.0development'
       },
       ninja: {
-        src: '<config:concat.ninja.dest>'
+        src: '<%= concat.ninja.dest %>'
       }
     },
     min: {
       options: {
-        banner: '<config:banner>'
+        banner: '<%= banner %>'
       },
       ninja: {
-        src: '<config:concat.ninja.dest>',
+        src: '<%= concat.ninja.dest %>',
         dest: 'distribution/<%= pkg.name %>.min.js'
       }
     },
     watch: {
       gruntfile: {
-        files: '<config:lint.gruntfile.src>',
+        files: '<%= lint.gruntfile.src %>',
         tasks: ['lint:gruntfile']
       },
       library: {
-        files: '<config:lint.library.src>',
+        files: '<%= lint.library.src %>',
         tasks: ['lint:library', 'qunit', 'reload']
       },
       stylus: {
@@ -124,7 +125,7 @@ module.exports = function (grunt) {
         tasks: ['stylus', 'restyle']
       },
       test: {
-        files: ['<config:lint.test.src>', 'test/**/*.html'],
+        files: ['<%= lint.test.src %>', 'test/**/*.html'],
         tasks: ['lint:test', 'qunit', 'reload']
       }
     },
