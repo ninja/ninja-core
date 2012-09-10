@@ -1,6 +1,6 @@
 {
   "name": "ninja",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "Ninja UI",
   "homepage": "http://ninjaui.com/",
   "repository": {
@@ -18,7 +18,7 @@
     "consolidate": "0.4",
     "dox": "0.3",
     "express": "3.0",
-    "grunt": "git://github.com/cowboy/grunt.git#21f8b63f5edd102a9f9d294ef324a5e778cf0bca",
+    "grunt": "https://nodeload.github.com/cowboy/grunt/tarball/e8977727186c45722bf9d0bd893a8aa71fdb4ba3",
     "handlebars": "1.0",
     "nib": "0.7",
     "socket.io": "0.9",

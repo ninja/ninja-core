@@ -10,27 +10,28 @@ module.exports = function (grunt) {
       stylus = require('stylus'),
       http = require('http'),
       path = require('path'),
-      app = express(),
-      server = http.createServer(app),
+      application = express(),
+      server = http.createServer(application),
       io = require('socket.io').listen(server),
       name = grunt.config.get('pkg.name'),
       component = name !== 'ninja';
 
-    app.configure(function () {
-      app.engine('html', handlebars);
-      app.set('port', grunt.config.get('server.port') || 3000);
-      app.set('views', path.resolve(__dirname, 'server/views'));
-      app.set('view engine', 'html');
-      app.use(express.favicon());
-      app.use(express.logger(function () {}));
-      app.use(express.bodyParser());
-      app.use(express.methodOverride());
-      app.use(app.router);
-      app.use(express.static(path.resolve(__dirname, 'server/public')));
+    application.configure(function () {
+      application
+        .engine('html', handlebars)
+        .set('port', grunt.config.get('server.port') || 3000)
+        .set('views', path.resolve(__dirname, 'server/views'))
+        .set('view engine', 'html')
+        .use(express.favicon())
+        .use(express.logger(function () {}))
+        .use(express.bodyParser())
+        .use(express.methodOverride())
+        .use(application.router)
+        .use(express.static(path.resolve(__dirname, 'server/public')));
     });
 
-    app.configure('development', function () {
-      app.use(express.errorHandler());
+    application.configure('development', function () {
+      application.use(express.errorHandler());
     });
 
     function style(render) {
@@ -52,7 +53,7 @@ module.exports = function (grunt) {
         });
     }
 
-    app.get('/', function (req, res) {
+    application.get('/', function (req, res) {
       var
         middle = dox.parseComments(grunt.file.read(grunt.file.expand(grunt.config.get('documentation.ninja.src')))),
         first = middle.shift(),
@@ -78,23 +79,23 @@ module.exports = function (grunt) {
       });
     });
 
-    app.get('/library/ninja.js', function (req, res) {
+    application.get('/library/ninja.js', function (req, res) {
       res.sendfile(path.resolve(__dirname, '../library/ninja.js'));
     });
 
-    app.get('/library/*.js', function (req, res) {
+    application.get('/library/*.js', function (req, res) {
       res.set('Content-Type', 'text/javascript');
 
       res.send(grunt.file.read(grunt.file.expand('library/<%= pkg.name %>.js')));
     });
 
-    app.get('/test/*.js', function (req, res) {
+    application.get('/test/*.js', function (req, res) {
       res.set('Content-Type', 'text/javascript');
 
       res.send(grunt.file.read(grunt.file.expand('test/<%= pkg.name %>.js')));
     });
 
-    app.get('/test', function (req, res) {
+    application.get('/test', function (req, res) {
       style(function (style) {
         res.render('test', {
           name: name,
@@ -105,7 +106,7 @@ module.exports = function (grunt) {
       });
     });
 
-    server.listen(app.get('port'));
+    server.listen(application.get('port'));
 
     io.configure(function () {
       io.set('log level', 1);

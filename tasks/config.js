@@ -3,13 +3,6 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: '<json:package.json>',
-    banner: '/*!\n' +
-      '<%= pkg.name %> <%= pkg.version %>\n' +
-      '<%= pkg.homepage %>\n' +
-      'Copyright 2008-<%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
-      'Licensed per the terms of the <%= pkg.licenses[0].type %>\n' +
-      '<%= pkg.licenses[0].url %>\n' +
-      '*/',
     jshint: {
       options: { // overrides: https://github.com/jshint/jshint/blob/master/jshint.js#L253
         asi: false, // automatic semicolon insertion not allowed
@@ -86,11 +79,17 @@ module.exports = function (grunt) {
     },
     concat: {
       options: {
-        banner: '<%= banner %>',
+        banner: '/*!\n' +
+          '<%= pkg.name %> <%= pkg.version %>\n' +
+          '<%= pkg.homepage %>\n' +
+          'Copyright 2008-<%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
+          'Licensed per the terms of the <%= pkg.licenses[0].type %>\n' +
+          '<%= pkg.licenses[0].url %>\n' +
+          '*/',
         stripBanners: true
       },
       ninja: {
-        src: 'library/<%= pkg.name %>.js>',
+        src: 'library/**/*.js',
         dest: 'distribution/<%= pkg.name %>.js'
       }
     },
@@ -104,7 +103,7 @@ module.exports = function (grunt) {
     },
     min: {
       options: {
-        banner: '<%= banner %>'
+        banner: '/*<%= pkg.name %> <%= pkg.version %> <%= pkg.homepage %> Copyright 2008-<%= grunt.template.today("yyyy") %> <%= pkg.author.name %> Licensed per the terms of the <%= pkg.licenses[0].type %> <%= pkg.licenses[0].url %>*/',
       },
       ninja: {
         src: '<%= concat.ninja.dest %>',
