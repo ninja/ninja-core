@@ -2,7 +2,7 @@ module.exports = function (grunt) {
   'use strict';
 
   grunt.initConfig({
-    pkg: '<json:package.json>',
+    pkg: grunt.file.readJSON('package.json'),
     jshint: {
       options: { // overrides: https://github.com/jshint/jshint/blob/master/jshint.js#L253
         asi: false, // automatic semicolon insertion not allowed
@@ -22,45 +22,29 @@ module.exports = function (grunt) {
         supernew: false, // `new function () { ... };` and `new Object;` not allowed
         sub: false, // all forms of subscript not allowed
         trailing: true, // trailing whitespace not allowed
-        white: true // Crockford's whitespace rules required
-      }
-    },
-    lint: {
-      gruntfile: {
-        options: '<config:jshint>',
-        src: 'gruntfile.js'
+        white: true, // Crockford's whitespace rules required
+        globals: {
+          // QUnit globals allowed
+          QUnit: false,
+          asyncTest: false,
+          deepEqual: false,
+          equal: false,
+          expect: false,
+          notEqual: false,
+          notStrictEqual: false,
+          ok: false,
+          raises: false,
+          setup: false,
+          start: false,
+          stop: false,
+          strictEqual: false,
+          test: false
+        }
       },
-      library: {
-        options: '<config:jshint>',
-        src: 'library/**/*.js'
-      },
-      tasks: {
-        options: '<config:jshint>',
-        src: ['tasks/*.js', 'tasks/public/socket.js']
-      },
-      test: {
-        options: {
-          options: '<config:jshint.options>',
-          globals: {
-            // QUnit globals allowed
-            QUnit: false,
-            asyncTest: false,
-            deepEqual: false,
-            equal: false,
-            expect: false,
-            notEqual: false,
-            notStrictEqual: false,
-            ok: false,
-            raises: false,
-            setup: false,
-            start: false,
-            stop: false,
-            strictEqual: false,
-            test: false
-          }
-        },
-        src: 'test/**/*.js'
-      }
+      gruntfile: ['gruntfile.js'],
+      library: ['library/**/*.js'],
+      tasks: ['tasks/*.js', 'tasks/public/socket.js'],
+      test: ['test/**/*.js']
     },
     stylus: {
       ninja: {
@@ -71,12 +55,7 @@ module.exports = function (grunt) {
     qunit: {
       ninja: 'http://localhost:3000/test'
     },
-    documentation: {
-      ninja: {
-        src: 'library/<%= pkg.name %>.js',
-        dest: 'distribution/<%= pkg.name %>.documentation.html'
-      }
-    },
+    documentation: 'distribution/<%= pkg.name %>.documentation.html',
     concat: {
       options: {
         banner: '/*!\n' +
@@ -89,7 +68,7 @@ module.exports = function (grunt) {
         stripBanners: true
       },
       ninja: {
-        src: 'library/**/*.js',
+        src: 'library/<%= pkg.name %>.js',
         dest: 'distribution/<%= pkg.name %>.js'
       }
     },
@@ -101,7 +80,7 @@ module.exports = function (grunt) {
         src: '<%= concat.ninja.dest %>'
       }
     },
-    min: {
+    uglify: {
       options: {
         banner: '/*<%= pkg.name %> <%= pkg.version %> <%= pkg.homepage %> Copyright 2008-<%= grunt.template.today("yyyy") %> <%= pkg.author.name %> Licensed per the terms of the <%= pkg.licenses[0].type %> <%= pkg.licenses[0].url %>*/',
       },
@@ -112,24 +91,29 @@ module.exports = function (grunt) {
     },
     watch: {
       gruntfile: {
-        files: '<%= lint.gruntfile.src %>',
-        tasks: ['lint:gruntfile']
+        files: '<%= jshint.gruntfile %>',
+        tasks: ['jshint:gruntfile']
       },
       library: {
-        files: '<%= lint.library.src %>',
-        tasks: ['lint:library', 'qunit', 'reload']
+        files: '<%= jshint.library %>',
+        tasks: ['jshint:library', 'qunit', 'reload']
       },
       stylus: {
         files: 'library/**/*.styl',
         tasks: ['stylus', 'restyle']
       },
       test: {
-        files: ['<%= lint.test.src %>', 'test/**/*.html'],
-        tasks: ['lint:test', 'qunit', 'reload']
+        files: ['<%= jshint.test.src %>', 'test/**/*.html'],
+        tasks: ['jshint:test', 'qunit', 'reload']
       }
     },
     server: {
-      port: 3000
+      port: 3000,
+      stylus: 'library/<%= pkg.name %>.styl',
+      test: {
+        html: 'test/<%= pkg.name %>.html',
+        js: 'test/<%= pkg.name %>.js'
+      }
     }
   });
 

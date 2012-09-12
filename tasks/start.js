@@ -3,7 +3,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('start', [
     'stylus',
-    'lint',
+    'jshint',
     'server',
     'qunit',
     'watch'

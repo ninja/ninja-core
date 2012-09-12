@@ -5,36 +5,40 @@ module.exports = function (grunt) {
     var
       css = '',
       stylus = require('stylus'),
-      nib = require('nib'),
-      distribution = this.file.dest,
-      library = grunt.file.expand(this.file.src),
-      index = 0;
+      nib = require('nib');
 
-    library.forEach(function (file) {
-      stylus(grunt.file.read(file))
-        .use(nib())
-        .import('nib')
-        .set('compress', true)
-        .set('filename', file)
-        .render(function (error, styles) {
-          if (error) {
-            grunt.log.error(error);
+    this.files.forEach(function (fileObject) {
+      var
+        library = grunt.file.expandFiles(fileObject.src),
+        distribution = fileObject.dest,
+        index = 0;
 
-            grunt.fail.warn('Failed.');
-          } else {
-            grunt.log.writeln('Parsed: ' + file);
+      library.forEach(function (file) {
+        stylus(grunt.file.read(file))
+          .use(nib())
+          .import('nib')
+          .set('compress', true)
+          .set('filename', file)
+          .render(function (error, styles) {
+            if (error) {
+              grunt.log.error(error);
 
-            css += styles;
+              grunt.fail.warn('Stylus failed.');
+            } else {
+              grunt.log.writeln('Parsed: ' + file);
 
-            index += 1;
+              css += styles;
 
-            if (index === library.length) {
-              grunt.file.write(distribution, css);
+              index += 1;
 
-              grunt.log.writeln('Compiled: ' + distribution);
+              if (index === library.length) {
+                grunt.file.write(grunt.template.process(distribution), css);
+
+                grunt.log.writeln('Compiled: ' + distribution);
+              }
             }
-          }
-        });
+          });
+      });
     });
   });
 };

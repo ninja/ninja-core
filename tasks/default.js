@@ -3,12 +3,12 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'stylus',
-    'lint',
+    'jshint',
     'server',
     'qunit',
     'documentation',
     'concat',
     'version',
-    'min'
+    'uglify'
   ]);
 };

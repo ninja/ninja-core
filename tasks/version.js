@@ -5,13 +5,16 @@ module.exports = function (grunt) {
     var
       version = grunt.config.get('pkg.version'),
       placeholder = grunt.config.get('version.options.placeholder') || '0.0.0development',
-      regularexpression = new RegExp(placeholder),
-      files = grunt.file.expand(this.file.src);
+      regularexpression = new RegExp(placeholder);
 
-    files.forEach(function (file) {
-      grunt.file.write(file, grunt.file.read(file).replace(regularexpression, version));
+    this.files.forEach(function (fileObject) {
+      var files = grunt.file.expandFiles(fileObject.src);
 
-      grunt.log.writeln('Replaced "' + placeholder + '" with "' + version + '": ' + file);
+      files.forEach(function (file) {
+        grunt.file.write(file, grunt.file.read(file).replace(regularexpression, version));
+
+        grunt.log.writeln('Replaced "' + placeholder + '" with "' + version + '": ' + file);
+      });
     });
   });
 };

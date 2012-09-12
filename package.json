@@ -22,7 +22,8 @@
     "handlebars": "1.0",
     "nib": "0.7",
     "socket.io": "0.9",
-    "stylus": "0.29"
+    "stylus": "0.29",
+    "sugar": "1.2"
   },
   "scripts": {
     "prepublish": "./node_modules/grunt/bin/grunt",

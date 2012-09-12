@@ -1,11 +1,11 @@
 module.exports = function (grunt) {
   'use strict';
 
-  grunt.registerMultiTask('documentation', 'Compile documentation HTML from JavaScript source.', function () {
+  grunt.registerTask('documentation', 'Compile documentation HTML from JavaScript source.', function () {
     var
       done = this.async(),
       http = require('http'),
-      file = this.file.dest,
+      file = grunt.config.get('documentation'),
       html = '';
 
     http.get('http://localhost:3000/?socket=false', function (response) {
