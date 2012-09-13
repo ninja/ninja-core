@@ -105,7 +105,7 @@ module.exports = function (grunt) {
       });
 
       grunt.registerTask('restyle', function () {
-        style(style(styleBuffer()), function (style) {
+        style(styleBuffer(), function (style) {
           socket.emit('restyle', style, 'Restyling page...');
         });
       });

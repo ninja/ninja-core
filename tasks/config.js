@@ -48,7 +48,7 @@ module.exports = function (grunt) {
     },
     stylus: {
       ninja: {
-        src: 'library/**/ninja-*.styl',
+        src: 'library/<%= pkg.name %>.styl',
         dest: 'distribution/<%= pkg.name %>.css'
       }
     },
@@ -100,7 +100,7 @@ module.exports = function (grunt) {
       },
       stylus: {
         files: 'library/**/*.styl',
-        tasks: ['stylus', 'restyle']
+        tasks: ['restyle']
       },
       test: {
         files: ['<%= jshint.test.src %>', 'test/**/*.html'],

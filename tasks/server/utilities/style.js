@@ -7,6 +7,7 @@ module.exports = function style(buffer, response) {
   stylus(buffer)
     .use(nib())
     .import('nib')
+    .import(path.resolve(__dirname, '../../../library/ninja'))
     .import(path.resolve(__dirname, '../../../library/ninja-code'))
     .import(path.resolve(__dirname, '../../../library/ninja-table'))
     .import(path.resolve(__dirname, '../../../library/ninja-documentation'))
