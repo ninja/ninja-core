@@ -6,7 +6,6 @@ module.exports = function (grunt) {
     'jshint',
     'server',
     'qunit',
-    'documentation',
     'concat',
     'version',
     'uglify'

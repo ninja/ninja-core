@@ -1,0 +1,60 @@
+$color-background = rgba(255,255,255,0.95)
+$color-border-light = rgba(0,0,0,0.1)
+$color-border-medium = rgba(0,0,0,0.2)
+$color-foreground = #333
+$color-highlight-background = rgba(0,0,0,0.2)
+$color-highlight-foreground = rgba(255,255,255,0.95)
+
+.ninja-list {
+  background-color: $color-background;
+  border-radius: 4px;
+  box-shadow: 0 0 10px #000;
+  color: $color-foreground;
+  > .ninja-item {
+    padding: 4px 24px;
+    &.ninja-first {
+      border-radius: 4px 4px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 4px 4px;
+    }
+    &:hover,
+    &.ninja-hover {
+      background-color: $color-highlight-background;
+      color: $color-highlight-foreground;
+    }
+  }
+  > .ninja-rule {
+    border-top: 1px solid $color-border-light;
+  }
+}
+
+.ninja-menu {
+  color: $color-foreground;
+  display: inline-block;
+  padding: 4px 12px;
+  vertical-align: middle;
+  &:hover,
+  &.ninja-select {
+    border-radius: 4px;
+  }
+  &:hover {
+    background-color: rgba(0,0,0,0.05);
+  }
+  &.ninja-select {
+    background-color: $color-highlight-background;
+    color: $color-highlight-foreground;
+    > .ninja-arrow-down {
+      border-top-color: $color-highlight-foreground;
+    }
+  }
+  img {
+    vertical-align: middle;
+  }
+  > .ninja-arrow-down {
+    border-top-color: $color-foreground;
+  }
+  > .ninja-list > .ninja-point-up {
+    border-bottom-color: $color-background;
+  }
+}

@@ -1,58 +1,28 @@
 @charset 'UTF-8';
 
-$color-background = rgba(255,255,255,0.95)
-$color-border-light = rgba(0,0,0,0.1)
-$color-highlight-background = rgba(0,0,0,0.2)
-$color-highlight-foreground = rgba(255,255,255,0.95)
-
-.nui-arw-dwn,
-.nui-arw-up {
+.ninja-arrow-down,
+.ninja-arrow-up {
   border-right: 4px solid transparent;
   border-left: 4px solid transparent;
   display: inline-block;
   vertical-align: middle;
 }
 
-.nui-arw-dwn {
+.ninja-arrow-down {
   border-top: 5px solid;
 }
 
-.nui-arw-up {
+.ninja-arrow-up {
   border-bottom: 5px solid;
 }
 
-.nui-lst {
-  background-color: $color-background;
-  border-radius: 4px;
-  box-shadow: 0 0 10px #000;
+.ninja-list {
   left: 0;
   position: absolute;
   min-width: 100%;
   z-index: 8;
-  > .nui-opt {
+  > li {
     display: block;
-    padding: 4px 24px;
     white-space: nowrap;
-    &.nui-fst {
-      border-radius: 4px 4px 0 0;
-    }
-    &:last-child {
-      border-radius: 0 0 4px 4px;
-    }
-    &:hover,
-    &.nui-hvr {
-      background-color: $color-highlight-background;
-      color: $color-highlight-foreground;
-    }
-  }
-  > hr.nui-opt {
-    border: none;
-    border-top: 1px solid $color-border-light;
-    margin: 0;
-    padding: 0;
-  }
-  > a.nui-opt {
-    color: inherit;
-    text-decoration: none;
   }
 }
