@@ -8,7 +8,6 @@ module.exports = function style(buffer, response) {
     .use(nib())
     .import('nib')
     .import(path.resolve(__dirname, '../styles/ninja-table'))
-    .import(path.resolve(__dirname, '../styles/ninja-documentation'))
     .import(path.resolve(__dirname, '../styles/ninja-qunit'))
     .import(path.resolve(__dirname, '../../../library/themes/default'))
     .import(path.resolve(__dirname, '../../../library/ninja'))

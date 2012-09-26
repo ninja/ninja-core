@@ -1,11 +1,10 @@
 module.exports = function (grunt) {
   'use strict';
 
-  grunt.registerTask('server', 'Host tests and documentation.', function () {
+  grunt.registerTask('server', 'Host tests.', function () {
 
     var
       path = require('path'),
-      dox = require('dox'),
       express = require('express'),
       handlebars = require('consolidate').handlebars,
       http = require('http'),
@@ -13,7 +12,6 @@ module.exports = function (grunt) {
       server = http.createServer(application),
       io = require('socket.io').listen(server),
       name = grunt.config.get('pkg.name'),
-      // render = require('./server/utilities/render'),
       style = require('./server/utilities/style');
 
     function styleBuffer() {
@@ -49,14 +47,10 @@ module.exports = function (grunt) {
     });
 
     application.get('/', function (request, response) {
-      var middle = dox.parseComments(grunt.file.read(grunt.config.get('concat.ninja.src')));
-
       style(styleBuffer(), response);
 
-      response.render('documentation', {
-        first: middle.shift(),
-        last: middle.pop(),
-        middle: middle
+      response.render('test', {
+        fixture: grunt.file.read(grunt.config.get('server.test.html'))
       });
     });
 
@@ -74,14 +68,6 @@ module.exports = function (grunt) {
       response.set('Content-Type', 'text/javascript');
 
       response.send(grunt.file.read(grunt.config.get('server.test.js')));
-    });
-
-    application.get('/test', function (request, response) {
-      style(styleBuffer(), response);
-
-      response.render('test', {
-        fixture: grunt.file.read(grunt.config.get('server.test.html'))
-      });
     });
 
     server.listen(application.get('port'));

@@ -53,18 +53,17 @@ module.exports = function (grunt) {
       }
     },
     qunit: {
-      ninja: 'http://localhost:3000/test'
+      ninja: 'http://localhost:3000/'
     },
-    documentation: 'distribution/<%= pkg.name %>.documentation.html',
     concat: {
       options: {
         banner: '/*!\n' +
-          '<%= pkg.name %> <%= pkg.version %>\n' +
-          '<%= pkg.homepage %>\n' +
-          'Copyright 2008-<%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
-          'Licensed per the terms of the <%= pkg.licenses[0].type %>\n' +
-          '<%= pkg.licenses[0].url %>\n' +
-          '*/',
+          '  <%= pkg.name %> <%= pkg.version %>\n' +
+          '  <%= pkg.homepage %>\n\n' +
+          '  Copyright 2008-<%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
+          '  Licensed per the terms of the <%= pkg.licenses[0].type %>\n' +
+          '  <%= pkg.licenses[0].url %>\n' +
+          '*/\n\n',
         stripBanners: true
       },
       ninja: {
