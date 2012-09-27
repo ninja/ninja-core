@@ -102,7 +102,7 @@ module.exports = function (grunt) {
         tasks: ['restyle']
       },
       test: {
-        files: ['<%= jshint.test.src %>', 'test/**/*.html'],
+        files: ['<%= jshint.test %>', 'test/**/*.html'],
         tasks: ['jshint:test', 'qunit', 'reload']
       }
     },
