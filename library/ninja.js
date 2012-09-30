@@ -48,8 +48,15 @@
   };
 
   $.Ninja = function (element, options) {
-    this.$element = element ? $(element) : $('<span>');
-    this.options = options || {};
+    if ($.isPlainObject(element)) {
+      this.$element = $('<span>');
+
+      this.options = element;
+    } else {
+      this.$element = $(element);
+
+      this.options = options || {};
+    }
   };
 
   $.Ninja.prototype.deselect = function () {
