@@ -1,0 +1,39 @@
+{
+  "name": "ninja",
+  "title": "Ninja",
+  "description": "Ninja UI",
+  "keywords": [
+    "ninja",
+    "ui"
+  ],
+  "version": "1.1.24",
+  "author": {
+    "name": "Jamie Hoover",
+    "url": "http://ninjaui.com/"
+  },
+  "maintainers": [
+    {
+      "name": "Jamie Hoover",
+      "email": "dont.tase@me.com",
+      "url": "http://ninjaui.com/"
+    },
+    {
+      "name": "Faisal N. Jawdat",
+      "email": "faisal@faisal.com",
+      "url": "http://faisal.com/"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "Apache License v2.0",
+      "url": "http://ninjaui.com/license.txt"
+    }
+  ],
+  "bugs": "https://github.com/ninja/ninja/issues",
+  "homepage": "http://ninjaui.com/",
+  "docs": "http://ninjaui.com/",
+  "download": "http://ninjaui.com/",
+  "dependencies": {
+    "jquery": ">=1.6"
+  }
+}
