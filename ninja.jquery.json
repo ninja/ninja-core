@@ -6,7 +6,7 @@
     "ninja",
     "ui"
   ],
-  "version": "1.1.24",
+  "version": "1.2",
   "author": {
     "name": "Jamie Hoover",
     "url": "http://ninjaui.com/"
@@ -14,13 +14,11 @@
   "maintainers": [
     {
       "name": "Jamie Hoover",
-      "email": "dont.tase@me.com",
-      "url": "http://ninjaui.com/"
+      "email": "jamie@ninjaui.com"
     },
     {
       "name": "Faisal N. Jawdat",
-      "email": "faisal@faisal.com",
-      "url": "http://faisal.com/"
+      "email": "faisal@ninjaui.com"
     }
   ],
   "licenses": [

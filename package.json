@@ -1,6 +1,6 @@
 {
   "name": "ninja",
-  "version": "1.1.24",
+  "version": "1.2.0",
   "description": "Ninja UI",
   "homepage": "http://ninjaui.com/",
   "repository": {
@@ -11,23 +11,8 @@
     "url" : "http://github.com/ninja/ninja/issues"
   },
   "engines": {
-    "node": "0.8",
-    "npm": "1.1"
-  },
-  "devDependencies": {
-    "consolidate": "*",
-    "express": "*",
-    "grunt": "https://nodeload.github.com/cowboy/grunt/tarball/e8977727186c45722bf9d0bd893a8aa71fdb4ba3",
-    "handlebars": "*",
-    "nib": "*",
-    "socket.io": "*",
-    "stylus": "*",
-    "sugar": "*"
-  },
-  "scripts": {
-    "prepublish": "./node_modules/grunt/bin/grunt",
-    "start": "./node_modules/grunt/bin/grunt start",
-    "test": "./node_modules/grunt/bin/grunt test"
+    "node": "0.10",
+    "npm": "1.2"
   },
   "main": "library/ninja",
   "licenses": [
@@ -38,14 +23,12 @@
   ],
   "author": {
     "name": "Jamie Hoover",
-    "email": "dont.tase@me.com",
-    "url": "http://uipoet.com"
+    "email": "jamie@ninjaui.com"
   },
   "contributors": [
     {
       "name": "Faisal N. Jawdat",
-      "email": "faisal@faisal.com",
-      "url": "http://faisal.com"
+      "email": "faisal@ninjaui.com"
     }
   ]
 
