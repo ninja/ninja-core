@@ -1,94 +1,93 @@
 var
+  window = require('window'),
   $ = require('jquery');
 
-$('body').css('color', 'green');
+function message(type, params) {
+  if (window.console && window.console[type]) {
+    window.console[type]('Ninja: ' + params.join(' '));
+  }
+}
 
-// function Ninja() {
-//   this.keys = {
-//     arrowDown: 40,
-//     arrowLeft: 37,
-//     arrowRight: 39,
-//     arrowUp: 38,
-//     enter: 13,
-//     escape: 27,
-//     tab: 9
-//   };
+exports.error = function () {
+  message('error', Array.prototype.slice.call(arguments));
+};
 
-//   this.version = '0.0.0development';
-// }
+exports.info = function () {
+  message('info', Array.prototype.slice.call(arguments));
+};
 
-// Ninja.prototype.log = function (message) {
-//   if (window.console && 'log' in window.console) {
-//     window.console.log('Ninja: ' + message);
-//   }
-// };
+exports.log = function () {
+  message('log', Array.prototype.slice.call(arguments));
+};
 
-// Ninja.prototype.warn = function (message) {
-//   if (window.console && 'warn' in window.console) {
-//     window.console.warn('Ninja: ' + message);
-//   }
-// };
+exports.warn = function () {
+  message('warn', Array.prototype.slice.call(arguments));
+};
 
-// Ninja.prototype.error = function (message) {
-//   var fullMessage = 'Ninja: ' + message;
+function Ninja() {
+  this.keys = {
+    arrowDown: 40,
+    arrowLeft: 37,
+    arrowRight: 39,
+    arrowUp: 38,
+    enter: 13,
+    escape: 27,
+    tab: 9
+  };
 
-//   if (window.console && 'error' in window.console) {
-//     window.console.error(fullMessage);
-//   }
+  this.version = '0.0.0development';
+}
 
-//   throw fullMessage;
-// };
+Ninja.prototype.key = function (code, names) {
+  var
+    keys = this.keys,
+    codes = $.map(names, function (name) {
+      return keys[name];
+    });
 
-// Ninja.prototype.key = function (code, names) {
-//   var
-//     keys = this.keys,
-//     codes = $.map(names, function (name) {
-//       return keys[name];
-//     });
+  return $.inArray(code, codes) > -1;
+};
 
-//   return $.inArray(code, codes) > -1;
-// };
+$.Ninja = function (element, options) {
+  if ($.isPlainObject(element)) {
+    this.$element = $('<span>');
 
-// $.Ninja = function (element, options) {
-//   if ($.isPlainObject(element)) {
-//     this.$element = $('<span>');
+    this.options = element;
+  } else {
+    this.$element = $(element);
 
-//     this.options = element;
-//   } else {
-//     this.$element = $(element);
+    this.options = options || {};
+  }
+};
 
-//     this.options = options || {};
-//   }
-// };
+$.Ninja.prototype.deselect = function () {
+  if (this.$element.hasClass('nui-slc') && !this.$element.hasClass('nui-dsb')) {
+    this.$element.trigger('deselect.ninja');
+  }
+};
 
-// $.Ninja.prototype.deselect = function () {
-//   if (this.$element.hasClass('nui-slc') && !this.$element.hasClass('nui-dsb')) {
-//     this.$element.trigger('deselect.ninja');
-//   }
-// };
+$.Ninja.prototype.disable = function () {
+  this.$element.addClass('nui-dsb').trigger('disable.ninja');
+};
 
-// $.Ninja.prototype.disable = function () {
-//   this.$element.addClass('nui-dsb').trigger('disable.ninja');
-// };
+$.Ninja.prototype.enable = function () {
+  this.$element.removeClass('nui-dsb').trigger('enable.ninja');
+};
 
-// $.Ninja.prototype.enable = function () {
-//   this.$element.removeClass('nui-dsb').trigger('enable.ninja');
-// };
+$.Ninja.prototype.select = function () {
+  if (!this.$element.hasClass('nui-dsb')) {
+    this.$element.trigger('select.ninja');
+  }
+};
 
-// $.Ninja.prototype.select = function () {
-//   if (!this.$element.hasClass('nui-dsb')) {
-//     this.$element.trigger('select.ninja');
-//   }
-// };
+$.ninja = new Ninja();
 
-// $.ninja = new Ninja();
+$.fn.ninja = function (component, options) {
+  return this.each(function () {
+    if (!$.data(this, 'ninja.' + component)) {
+      $.data(this, 'ninja.' + component);
 
-// $.fn.ninja = function (component, options) {
-//   return this.each(function () {
-//     if (!$.data(this, 'ninja.' + component)) {
-//       $.data(this, 'ninja.' + component);
-
-//       $.ninja[component](this, options);
-//     }
-//   });
-// };
+      $.ninja[component](this, options);
+    }
+  });
+};
