@@ -1,31 +1,8 @@
 var
   window = require('window'),
-  $ = require('jquery');
-
-function message(type, params) {
-  if (window.console && window.console[type]) {
-    window.console[type]('Ninja: ' + params.join(' '));
-  }
-}
-
-exports.error = function () {
-  message('error', Array.prototype.slice.call(arguments));
-};
-
-exports.info = function () {
-  message('info', Array.prototype.slice.call(arguments));
-};
-
-exports.log = function () {
-  message('log', Array.prototype.slice.call(arguments));
-};
-
-exports.warn = function () {
-  message('warn', Array.prototype.slice.call(arguments));
-};
-
-function Ninja() {
-  this.keys = {
+  $ = require('jquery'),
+  history = [],
+  keys = {
     arrowDown: 40,
     arrowLeft: 37,
     arrowRight: 39,
@@ -35,20 +12,7 @@ function Ninja() {
     tab: 9
   };
 
-  this.version = '0.0.0development';
-}
-
-Ninja.prototype.key = function (code, names) {
-  var
-    keys = this.keys,
-    codes = $.map(names, function (name) {
-      return keys[name];
-    });
-
-  return $.inArray(code, codes) > -1;
-};
-
-$.Ninja = function (element, options) {
+function Ninja(element, options) {
   if ($.isPlainObject(element)) {
     this.$element = $('<span>');
 
@@ -58,36 +22,79 @@ $.Ninja = function (element, options) {
 
     this.options = options || {};
   }
-};
+}
 
-$.Ninja.prototype.deselect = function () {
-  if (this.$element.hasClass('nui-slc') && !this.$element.hasClass('nui-dsb')) {
+Ninja.prototype.deselect = function () {
+  if (this.$element.hasClass('ninja-selected') && !this.$element.hasClass('ninja-disabled')) {
     this.$element.trigger('deselect.ninja');
   }
 };
 
-$.Ninja.prototype.disable = function () {
-  this.$element.addClass('nui-dsb').trigger('disable.ninja');
+Ninja.prototype.disable = function () {
+  this.$element.addClass('ninja-disabled').trigger('disable.ninja');
 };
 
-$.Ninja.prototype.enable = function () {
-  this.$element.removeClass('nui-dsb').trigger('enable.ninja');
+Ninja.prototype.enable = function () {
+  this.$element.removeClass('ninja-disabled').trigger('enable.ninja');
 };
 
-$.Ninja.prototype.select = function () {
-  if (!this.$element.hasClass('nui-dsb')) {
+Ninja.prototype.select = function () {
+  if (!this.$element.hasClass('ninja-disabled')) {
     this.$element.trigger('select.ninja');
   }
 };
 
-$.ninja = new Ninja();
+module.exports = Ninja;
 
-$.fn.ninja = function (component, options) {
-  return this.each(function () {
-    if (!$.data(this, 'ninja.' + component)) {
-      $.data(this, 'ninja.' + component);
+module.exports.plugin = function () {
+  $.fn.ninja = function (component, options) {
+    var ninja = new Ninja();
 
-      $.ninja[component](this, options);
+    return this.each(function () {
+      if (!$.data(this, 'ninja.' + component)) {
+        $.data(this, 'ninja.' + component);
+
+        ninja[component](this, options);
+      }
+    });
+  };
+};
+
+module.exports.keys = keys;
+
+module.exports.key = function (code, names) {
+  var
+    codes = $.map(names, function (name) {
+      return keys[name];
+    });
+
+  return $.inArray(code, codes) > -1;
+};
+
+function log(type, parts) {
+  var message = Array.prototype.slice.call(parts).join(' ');
+
+  if (message) {
+    history.push({
+      type: type,
+      message: message
+    });
+
+    if (window.console) {
+      window.console[type]('Ninja: ' + message);
     }
-  });
+  }
+}
+
+module.exports.log = {
+  history: history,
+  error: function () {
+    log('error', arguments);
+  },
+  info: function () {
+    log('info', arguments);
+  },
+  warn: function () {
+    log('warn', arguments);
+  }
 };
