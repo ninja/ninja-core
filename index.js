@@ -50,9 +50,8 @@ module.exports.error = function () {
     console = window.console,
     message = Array.prototype.slice.call(arguments);
 
-  if (console && console.error && message.length) {
+  if (message.length && console && console.error) {
     message.unshift('Ninja:');
-
     console.error(message.join(' '));
   }
 };
