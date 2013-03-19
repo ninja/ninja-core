@@ -1,7 +1,6 @@
 var
   window = require('window'),
   $ = require('jquery'),
-  history = [],
   keys = {
     arrowDown: 40,
     arrowLeft: 37,
@@ -46,18 +45,16 @@ Ninja.prototype.select = function () {
 
 module.exports = Ninja;
 
-module.exports.plugin = function () {
-  $.fn.ninja = function (component, options) {
-    var ninja = new Ninja();
+module.exports.error = function () {
+  var
+    console = window.console,
+    message = Array.prototype.slice.call(arguments);
 
-    return this.each(function () {
-      if (!$.data(this, 'ninja.' + component)) {
-        $.data(this, 'ninja.' + component);
+  if (console && console.error && message.length) {
+    message.unshift('Ninja:');
 
-        ninja[component](this, options);
-      }
-    });
-  };
+    console.error(message.join(' '));
+  }
 };
 
 module.exports.keys = keys;
@@ -71,30 +68,16 @@ module.exports.key = function (code, names) {
   return $.inArray(code, codes) > -1;
 };
 
-function log(type, parts) {
-  var message = Array.prototype.slice.call(parts).join(' ');
+module.exports.plugin = function () {
+  $.fn.ninja = function (component, options) {
+    var ninja = new Ninja();
 
-  if (message) {
-    history.push({
-      type: type,
-      message: message
+    return this.each(function () {
+      if (!$.data(this, 'ninja.' + component)) {
+        $.data(this, 'ninja.' + component);
+
+        ninja[component](this, options);
+      }
     });
-
-    if (window.console) {
-      window.console[type]('Ninja: ' + message);
-    }
-  }
-}
-
-module.exports.log = {
-  history: history,
-  error: function () {
-    log('error', arguments);
-  },
-  info: function () {
-    log('info', arguments);
-  },
-  warn: function () {
-    log('warn', arguments);
-  }
+  };
 };
