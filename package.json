@@ -15,10 +15,6 @@
     "npm": "1.2"
   },
   "main": "ninja",
-  "devDependencies": {
-    "mocha-phantomjs": "*",
-    "chai": "*"
-  },
   "scripts": {
     "test": "mocha-phantomjs /test/index.html"
   },
