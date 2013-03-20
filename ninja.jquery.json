@@ -30,7 +30,7 @@
   "bugs": "https://github.com/ninja/ninja/issues",
   "homepage": "http://ninjaui.com/",
   "docs": "http://ninjaui.com/",
-  "download": "http://ninjaui.com/",
+  "download": "http://api.ninjajs.com/download/ninja.min.js",
   "dependencies": {
     "jquery": ">=1.6"
   }
